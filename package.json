@@ -1,0 +1,34 @@
+{
+    "name": "next-dynamic-antd-theme",
+    "version": "0.0.1",
+    "description": "A plugin for next to change ant design theme dynamicly",
+    "main": "index.js",
+    "scripts": {
+        "build": "node gen.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/OhYee/next-dynamic-antd-theme.git"
+    },
+    "keywords": [
+        "next",
+        "antd",
+        "ant design",
+        "theme"
+    ],
+    "author": "OhYee",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/OhYee/next-dynamic-antd-theme/issues"
+    },
+    "homepage": "https://github.com/OhYee/next-dynamic-antd-theme#readme",
+    "dependencies": {
+        "antd-theme-generator": "^1.1.9",
+        "before-build-webpack": "^0.2.9",
+        "on-build-webpack": "^0.1.0"
+    },
+    "devDependencies": {
+        "antd": "^4.0.1"
+    }
+}
