@@ -5,7 +5,7 @@ jobs:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     env: 
-      - working-directory: ./example
+      working-directory: ./example
     steps:
       - run: cd example
       - uses: actions/checkout@master
