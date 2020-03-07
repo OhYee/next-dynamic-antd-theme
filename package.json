@@ -17,18 +17,19 @@
         "ant design",
         "theme"
     ],
-    "author": "OhYee",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/OhYee/next-dynamic-antd-theme/issues"
     },
     "homepage": "https://github.com/OhYee/next-dynamic-antd-theme#readme",
     "dependencies": {
-        "antd-theme-generator": "^1.1.9",
-        "before-build-webpack": "^0.2.9",
-        "on-build-webpack": "^0.1.0"
+        "antd-theme-generator": "^1.1.9"
     },
-    "devDependencies": {
-        "antd": "^4.0.1"
-    }
+    "devDependencies": {},
+    "files": [
+        "./theme/*",
+        "./index.js",
+        "./index.d.ts",
+        "./plugin.js"
+    ]
 }

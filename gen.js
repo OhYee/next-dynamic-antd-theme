@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const less = require('less');
 
+const antdDir = './example/node_modules/antd';
+
 async function convertLess(less_filename, callback) {
   try {
     var data = await fs.readFileSync(less_filename, {});
@@ -38,7 +40,7 @@ async function convertLess(less_filename, callback) {
 }
 
 async function generateJS(less_filename, js_filename) {
-  res = [];
+  var res = [];
   await convertLess(less_filename, (key, value) => {
     res.push(`\t"${key}": "${value}",`);
   });
@@ -51,24 +53,33 @@ async function generateJS(less_filename, js_filename) {
 
 async function generateThemeObject(theme) {
   await generateJS(
-    path.join(__dirname, `./node_modules/antd/lib/style/themes/${theme}.less`),
-    path.join(__dirname, `./src/${theme}.js`),
+    path.join(__dirname, antdDir, `lib/style/themes/${theme}.less`),
+    path.join(__dirname, `./theme/${theme}.js`),
   );
 }
 
 async function generateKeys() {
   var keys = [];
   await convertLess(
-    path.join(__dirname, './node_modules/antd/lib/style/themes/default.less'),
+    path.join(__dirname, antdDir, 'lib/style/themes/default.less'),
     async (key, value) => {
       keys.push(`'${key}'`);
     },
   );
-  setTimeout(() => {}, 2000);
 
   await fs.writeFile(
-    path.join(__dirname, `./src/keys.js`),
+    path.join(__dirname, `./theme/keys.js`),
     `module.exports = [\n\t${keys.join(',\n\t')}\n];`,
+    {},
+    e => {
+      if (e != null) {
+        console.log(e);
+      }
+    },
+  );
+  await fs.writeFile(
+    path.join(__dirname, `./theme/type.ts`),
+    `export default interface ThemeType {\n${keys.map(key => `  ${key}?: string;\n`).join('')}\n};`,
     {},
     e => {
       if (e != null) {
@@ -81,7 +92,7 @@ async function generateKeys() {
 generateThemeObject('default');
 generateThemeObject('dark');
 generateJS(
-  path.join(__dirname, `./node_modules/antd/lib/style/color/colors.less`),
-  path.join(__dirname, './src/color.js'),
+  path.join(__dirname, antdDir, `lib/style/color/colors.less`),
+  path.join(__dirname, 'theme/color.js'),
 );
 generateKeys();
