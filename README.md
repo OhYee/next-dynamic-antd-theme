@@ -7,6 +7,13 @@ There are some problems in dark theme, for example the color of `ant-menu-item-s
 
 ## Usage
 
+```
+npm i next-dynamic-antd-theme
+
+yarn add next-dynamic-antd-theme
+```
+
+
 See [example](example)
 
 [next.config.js](example/next.config.js)
