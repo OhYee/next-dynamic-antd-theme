@@ -1,12 +1,16 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-
+import getConfig from 'next/config';
 export default class MyDocument extends Document {
   render() {
     return (
       <Html>
         <Head></Head>
         <body>
-          <link rel="stylesheet/less" type="text/css" href="/_next/static/color.less" />
+          <link
+            rel="stylesheet/less"
+            type="text/css"
+            href={`${getConfig().publicRuntimeConfig.prefix}_next/static/color.less`}
+          />
           <script
             dangerouslySetInnerHTML={{
               __html: `window.less = { async: false, env: 'production' };`,

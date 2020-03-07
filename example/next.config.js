@@ -8,6 +8,7 @@ const cssLoaderGetLocalIdent = require('css-loader/lib/getLocalIdent.js');
 const withCss = require('@zeit/next-css');
 
 const prod = process.env.NODE_ENV === 'production';
+const prefix = prod ? 'https://ohyee.github.io/next-dynamic-antd-theme/' : '/';
 
 const withAntdTheme = generateTheme({
   antDir: path.join(__dirname, './node_modules/antd'),
@@ -58,7 +59,9 @@ withAntd = (nextConfig = {}) => {
 };
 
 module.exports = withPlugins([withAntd, withLess, withTM, withSass, withCss, withAntdTheme], {
-  assetPrefix: prod ? 'https://ohyee.github.io/next-dynamic-antd-theme/' : '',
+  serverRuntimeConfig: {  },
+  publicRuntimeConfig: { prefix },
+  assetPrefix: prefix,
   webpack: (config, options) => {
     // config.node = { fs: 'empty' };
     return config;

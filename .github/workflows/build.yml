@@ -18,6 +18,8 @@ jobs:
         working-directory: ./example
       - run: yarn export
         working-directory: ./example
+      - run: touch .nojekyll
+        working-directory: ./example/out/
       - name: Deploy
         uses: s0/git-publish-subdir-action@master
         env:
