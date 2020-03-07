@@ -10,19 +10,17 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install
+      - name: Install yarn
+        run: npm install -g yarn
+      - run: yarn
         working-directory: ./example
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: export
+      - run: yarn export
         working-directory: ./example
       - name: Deploy
         uses: s0/git-publish-subdir-action@master
         env:
           REPO: self
           BRANCH: gh-pages
-          FOLDER: out
+          FOLDER: ./example/out
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: ./example
+        # working-directory: ./example
