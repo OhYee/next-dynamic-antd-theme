@@ -1,6 +1,6 @@
 {
     "name": "next-dynamic-antd-theme",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "A plugin for next to change ant design theme dynamicly",
     "main": "index.js",
     "scripts": {
@@ -27,9 +27,19 @@
     },
     "devDependencies": {},
     "files": [
-        "./theme/*",
-        "./index.js",
-        "./index.d.ts",
-        "./plugin.js"
+        ".npmignore",
+        "LICENSE",
+        "README.md",
+        "index.js",
+        "index.d.ts",
+        "plugin.js",
+        "theme/color.js",
+        "theme/dark.js",
+        "theme/default.js",
+        "theme/keys.js",
+        "theme/type.ts",
+        "img/dark.png",
+        "img/default.png",
+        "img/red.png"
     ]
 }
