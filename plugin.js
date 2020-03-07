@@ -34,8 +34,6 @@ module.exports = ({ antDir, stylesDir, varFile, mainLessFile, outputFilePath }) 
         await fs.mkdirSync(dir);
       }
       await generateTheme(themeOptions);
-
-      console.log('Theme generated successfully');
     } catch (e) {
       console.log('Error', e);
     }

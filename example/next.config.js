@@ -58,6 +58,7 @@ withAntd = (nextConfig = {}) => {
 };
 
 module.exports = withPlugins([withAntd, withLess, withTM, withSass, withCss, withAntdTheme], {
+  assetPrefix: prod ? 'https://ohyee.github.io/next-dynamic-antd-theme/' : '',
   webpack: (config, options) => {
     // config.node = { fs: 'empty' };
     return config;
