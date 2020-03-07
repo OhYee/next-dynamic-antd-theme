@@ -4,8 +4,6 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
-    env: 
-      working-directory: ./example
     steps:
       - uses: actions/checkout@master
       - name: Use Node.js
@@ -15,9 +13,11 @@ jobs:
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
+        working-directory: ./example
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: export
+        working-directory: ./example
       - name: Deploy
         uses: s0/git-publish-subdir-action@master
         env:
@@ -25,3 +25,4 @@ jobs:
           BRANCH: gh-pages
           FOLDER: out
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ./example
