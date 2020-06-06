@@ -23,7 +23,7 @@
     },
     "homepage": "https://github.com/OhYee/next-dynamic-antd-theme#readme",
     "dependencies": {
-        "antd-theme-generator": "^1.1.9"
+        "antd-theme-generator": "^1.2.3"
     },
     "devDependencies": {},
     "files": [
