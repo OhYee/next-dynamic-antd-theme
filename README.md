@@ -10,7 +10,7 @@
 Using [antd-theme-generator](https://github.com/mzohaibqc/antd-theme-generator) to change Ant Design theme dynamic for Next.js
 
 **Warning!**
-There are some problems in dark theme, for example the color of `ant-menu-item-selected` background-color (You can override these unexcepted color)
+You may need to use `gen.js` to generate the theme you are using in the Ant Design version
 
 ## Usage
 
