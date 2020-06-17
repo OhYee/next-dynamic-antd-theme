@@ -22,7 +22,7 @@ class IndexPage extends React.Component<IndexPageProps, IndexPageState> {
     };
   }
 
-  renderLight = props => (
+  renderLight = (props) => (
     <div
       dangerouslySetInnerHTML={{
         __html: `
@@ -40,7 +40,7 @@ class IndexPage extends React.Component<IndexPageProps, IndexPageState> {
       }}
     />
   );
-  renderDark = props => (
+  renderDark = (props) => (
     <div
       dangerouslySetInnerHTML={{
         __html: `
