@@ -14,7 +14,6 @@ const withAntdTheme = generateTheme({
   antDir: path.join(__dirname, './node_modules/antd'),
   stylesDir: path.join(__dirname, './theme'),
   varFile: path.join(__dirname, './theme/vars.less'),
-  mainLessFile: path.join(__dirname, './theme/main.less'),
   outputFilePath: path.join(__dirname, './.next/static/color.less'),
 });
 
