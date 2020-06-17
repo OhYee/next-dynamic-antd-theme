@@ -9,9 +9,6 @@
 
 Using [antd-theme-generator](https://github.com/mzohaibqc/antd-theme-generator) to change Ant Design theme dynamic for Next.js
 
-**Warning!**
-You may need to use `gen.js` to generate the theme you are using in the Ant Design version
-
 ## Usage
 
 ```
@@ -32,7 +29,6 @@ const withAntdTheme = generateTheme({
   antDir: path.join(__dirname, './node_modules/antd'),
   stylesDir: path.join(__dirname, './theme'),
   varFile: path.join(__dirname, './theme/vars.less'),
-  mainLessFile: path.join(__dirname, './theme/main.less'),
   outputFilePath: path.join(__dirname, './.next/static/color.less'),
 });
 
