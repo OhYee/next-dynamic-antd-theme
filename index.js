@@ -1,32 +1,10 @@
-const antdColor = require('./theme/color');
-const antdDarkTheme = require('./theme/dark');
-const antdDefaultTheme = require('./theme/default');
-const defaultTheme = {
-  '@blue': 'blue',
-  '@purple': 'purple',
-  '@cyan': 'cyan',
-  '@green': 'green',
-  '@magenta': 'magenta',
-  '@pink': 'pink',
-  '@red': 'red',
-  '@orange': 'orange',
-  '@yellow': 'yellow',
-  '@volcano': 'volcano',
-  '@geekblue': 'geekblue',
-  '@lime': 'lime',
-  '@gold': 'gold',
-  ...antdColor,
-  ...antdDefaultTheme,
-};
-
-const themes = {
-  dark: { ...defaultTheme, ...antdDarkTheme },
-  default: { ...defaultTheme },
-};
+import getConfig from 'next/config';
+const { publicRuntimeConfig = {} } = getConfig() || {};
+const { next_dynamic_antd_themes = {} } = publicRuntimeConfig;
 
 function modifyVars(vars) {
-  if (typeof window !== 'undefined' && window.less) {
-    window.less.modifyVars(vars).catch(error => {
+  if (window.less) {
+    window.less.modifyVars(vars).catch((error) => {
       console.log(`Failed to update theme`, error);
     });
     console.log(vars);
@@ -35,12 +13,10 @@ function modifyVars(vars) {
   }
 }
 
-module.exports = function changeTheme(theme) {
-  if (theme == 'default' || theme == 'dark') {
-    modifyVars(themes[theme]);
+export default function changeTheme(theme) {
+  if (typeof theme === 'string' || theme == 'dark') {
+    modifyVars({ ...next_dynamic_antd_themes.default, ...next_dynamic_antd_themes[theme] });
   } else {
-    modifyVars({ ...defaultTheme, ...theme });
+    modifyVars({ ...next_dynamic_antd_themes.default, ...theme });
   }
 };
-module.exports.darkTheme = themes.dark;
-module.exports.defaultTheme = themes.default;
