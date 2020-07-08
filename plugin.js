@@ -22,11 +22,15 @@ module.exports = function generate(themeOptions) {
     antdStylesDir = path.join(antDir, 'lib'),
     stylesDir,
     varFile,
-    outputFilePath,
     cssModules,
     themeVariables,
     customColorRegexArray = [],
+    outputFilePath,
+    lessFilePath = '/_next/static/color.less', // Use if outputFilePath is `path.join(__dirname, './.next/static/color.less'),`
+    lessJSPath = 'https://cdnjs.cloudflare.com/ajax/libs/less.js/3.11.3/less.min.js',
   } = themeOptions;
+
+  console.log(outputFilePath);
 
   // read themes
   var themes = {};
@@ -47,7 +51,7 @@ module.exports = function generate(themeOptions) {
 
   const generator = async () => {
     try {
-      const dir = path.dirname(themeOptions.outputFilePath);
+      const dir = path.dirname(outputFilePath);
       if (!(await fs.existsSync(dir))) {
         await fs.mkdirSync(dir);
       }
@@ -61,8 +65,8 @@ module.exports = function generate(themeOptions) {
         themeVariables,
         customColorRegexArray,
       });
-        if (temp !== cache) {
-            cache = temp;
+      if (temp !== cache) {
+        cache = temp;
         await fs.appendFileSync(
           outputFilePath,
           `
@@ -104,7 +108,7 @@ module.exports = function generate(themeOptions) {
       publicRuntimeConfig: {
         // Will be available on both server and client
         ...nextConfig.publicRuntimeConfig,
-        next_dynamic_antd_themes: themes,
+        next_dynamic_antd_themes: { themes, lessFilePath, lessJSPath },
       },
       lessLoaderOptions: {
         javascriptEnabled: true,
