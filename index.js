@@ -20,6 +20,7 @@ function loadLess(src) {
 
 function loadLessandJS(callback) {
   loadJS(lessJSPath, () => {
+    window.less.options.javascriptEnabled = true;
     window.less.sheets = [loadLess(lessFilePath)];
     callback();
   });
