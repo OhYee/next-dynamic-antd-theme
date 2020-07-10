@@ -108,7 +108,7 @@ module.exports = function generate(themeOptions) {
       publicRuntimeConfig: {
         // Will be available on both server and client
         ...nextConfig.publicRuntimeConfig,
-        next_dynamic_antd_themes: { themes, lessFilePath, lessJSPath },
+        next_dynamic_antd_theme: { themes, lessFilePath, lessJSPath },
       },
       lessLoaderOptions: {
         javascriptEnabled: true,

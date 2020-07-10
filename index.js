@@ -1,7 +1,7 @@
 import getConfig from 'next/config';
 const { publicRuntimeConfig = {} } = getConfig() || {};
-const { next_dynamic_antd_themes = {} } = publicRuntimeConfig;
-const { themes, lessFilePath, lessJSPath } = next_dynamic_antd_themes;
+const { next_dynamic_antd_theme = {} } = publicRuntimeConfig;
+const { themes, lessFilePath, lessJSPath } = next_dynamic_antd_theme;
 
 function loadJS(src, callback) {
   const script = document.createElement('script');
