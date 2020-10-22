@@ -17,6 +17,7 @@ const withAntdTheme = generateTheme({
   outputFilePath: path.join(__dirname, './.next/static/color.less'),
   lessFilePath: `${prefix}_next/static/color.less`,
   lessJSPath: 'https://cdnjs.cloudflare.com/ajax/libs/less.js/3.11.3/less.min.js',
+  customThemes: { dark: { '@primary-color': 'yellow' } },
 });
 
 withAntd = (nextConfig = {}) => {

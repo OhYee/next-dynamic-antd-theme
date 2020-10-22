@@ -22,6 +22,10 @@ class IndexPage extends React.Component<IndexPageProps, IndexPageState> {
     };
   }
 
+  componentDidMount() {
+    changeTheme();
+  }
+
   renderLight = (props) => (
     <div
       dangerouslySetInnerHTML={{
