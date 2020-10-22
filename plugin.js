@@ -29,6 +29,7 @@ module.exports = function generate(themeOptions) {
     lessFilePath = '/_next/static/color.less', // Use if outputFilePath is `path.join(__dirname, './.next/static/color.less'),`
     lessJSPath = 'https://cdnjs.cloudflare.com/ajax/libs/less.js/3.11.3/less.min.js',
     prefix = 'antd',
+    customThemes = {},
   } = themeOptions;
 
   console.log(outputFilePath);
@@ -42,12 +43,20 @@ module.exports = function generate(themeOptions) {
     if (!!res && res[1] !== 'index') {
       const name = res[1];
       const filepath = path.join(antdStylesDir, 'style/themes', file);
-      themes[name] = getLessVars(filepath);
+      themes[name] = { ...getLessVars(filepath), ...customThemes[name] };
     }
   });
+
+  const _customVar = getLessVars(varFile);
+  const customVar = Object.assign(
+    {},
+    ...Object.keys(_customVar).map((k) => ({ [k.slice(1)]: _customVar[k] })),
+  );
   if (!themeVariables)
     themeVariables = Array.from(
-      new Set(Object.keys(themes.dark).concat(Object.keys(themes.default))),
+      new Set(
+        Object.keys(themes.dark).concat(Object.keys(themes.default)).concat(Object.keys(customVar)),
+      ),
     );
 
   const generator = async () => {
@@ -112,6 +121,11 @@ module.exports = function generate(themeOptions) {
         next_dynamic_antd_theme: { themes, lessFilePath, lessJSPath },
       },
       lessLoaderOptions: {
+        ...nextConfig.lessLoaderOptions,
+        modifyVars: {
+          ...(!!nextConfig.lessLoaderOptions && nextConfig.lessLoaderOptions.customVar),
+          ...customVar,
+        },
         javascriptEnabled: true,
       },
       webpack(config, options) {
