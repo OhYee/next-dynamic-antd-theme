@@ -18,16 +18,18 @@ function loadLess(src) {
   return link;
 }
 
-function loadLessandJS(callback) {
-  loadJS(lessJSPath, () => {
-    window.less.options.javascriptEnabled = true;
-    window.less.sheets = [loadLess(lessFilePath)];
-    callback();
-  });
+function loadLessAndJS(callback) {
+  if (!window.less) {
+    loadJS(lessJSPath, () => {
+      window.less.options.javascriptEnabled = true;
+      window.less.sheets = [loadLess(lessFilePath)];
+      if (!!callback) callback();
+    });
+  }
 }
 
 function modifyVars(vars) {
-  if (window.less) {
+  if (!!window.less) {
     window.less.modifyVars(vars).catch((error) => {
       console.log(`Failed to update theme`, error);
     });
@@ -37,17 +39,16 @@ function modifyVars(vars) {
 }
 
 function __changeTheme(theme) {
-  if (typeof theme === 'string' || theme == 'dark') {
+  if (!theme) modifyVars();
+  else if (typeof theme === 'string' || theme == 'dark')
     modifyVars({ ...themes.default, ...themes[theme] });
-  } else {
-    modifyVars({ ...themes.default, ...theme });
-  }
+  else modifyVars({ ...themes.default, ...theme });
 }
 
-export default function changeTheme(theme) {
+export default function changeTheme(theme = {}) {
   if (!!window.less) {
     __changeTheme(theme);
   } else {
-    loadLessandJS(() => __changeTheme(theme));
+    loadLessAndJS(() => __changeTheme(theme));
   }
 }
