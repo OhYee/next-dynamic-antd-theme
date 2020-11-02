@@ -123,7 +123,7 @@ module.exports = function generate(themeOptions) {
       lessLoaderOptions: {
         ...nextConfig.lessLoaderOptions,
         modifyVars: {
-          ...(!!nextConfig.lessLoaderOptions && nextConfig.lessLoaderOptions.customVar),
+          ...(!!nextConfig.lessLoaderOptions && nextConfig.lessLoaderOptions.modifyVars),
           ...customVar,
         },
         javascriptEnabled: true,
