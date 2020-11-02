@@ -38,20 +38,22 @@ module.exports = function generate(themeOptions) {
   var themes = {};
   const files = fs.readdirSync(path.join(antdStylesDir, 'style/themes'));
   const reg = /(.*)\.less/;
-  files.map((file) => {
-    const res = reg.exec(file);
-    if (!!res && res[1] !== 'index') {
-      const name = res[1];
-      const filepath = path.join(antdStylesDir, 'style/themes', file);
-      themes[name] = { ...getLessVars(filepath), ...customThemes[name] };
-    }
-  });
 
   const _customVar = getLessVars(varFile);
   const customVar = Object.assign(
     {},
     ...Object.keys(_customVar).map((k) => ({ [k.slice(1)]: _customVar[k] })),
   );
+
+  files.map((file) => {
+    const res = reg.exec(file);
+    if (!!res && res[1] !== 'index') {
+      const name = res[1];
+      const filepath = path.join(antdStylesDir, 'style/themes', file);
+      themes[name] = { ...getLessVars(filepath), ..._customVar, ...customThemes[name] };
+    }
+  });
+
   if (!themeVariables)
     themeVariables = Array.from(
       new Set(
