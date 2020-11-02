@@ -22,11 +22,14 @@ const withAntdTheme = generateTheme({
 
 withAntd = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
+    ...nextConfig,
     lessLoaderOptions: {
+      ...nextConfig.lessLoaderOptions,
       javascriptEnabled: true,
     },
     cssModules: true,
     cssLoaderOptions: {
+      ...nextConfig.cssLoaderOptions,
       camelCase: true,
       localIdentName: '[local]___[hash:base64:5]',
       getLocalIdent: (context, localIdentName, localName, options) => {
@@ -60,11 +63,12 @@ withAntd = (nextConfig = {}) => {
   });
 };
 
-module.exports = withPlugins([withAntd, withLess, withTM, withSass, withCss, withAntdTheme], {
-  serverRuntimeConfig: {},
-  assetPrefix: prefix,
-  webpack: (config, options) => {
-    // config.node = { fs: 'empty' };
-    return config;
-  },
-});
+module.exports = withLess(
+  withAntdTheme(
+    withAntd((config) => {
+      return {
+        assetPrefix: prefix,
+      };
+    }),
+  ),
+);
