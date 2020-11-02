@@ -129,7 +129,6 @@ module.exports = function generate(themeOptions) {
         javascriptEnabled: true,
       },
       webpack(config, options) {
-        // config.node = { fs: 'empty' };
         config.plugins.push(new Plugin(generator));
 
         return typeof nextConfig.webpack === 'function'
