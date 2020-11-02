@@ -1,11 +1,7 @@
 const withLess = require('@zeit/next-less');
-const withSass = require('@zeit/next-sass');
-const withPlugins = require('next-compose-plugins');
 const path = require('path');
 const generateTheme = require('next-dynamic-antd-theme/plugin');
-const withTM = require('next-transpile-modules');
 const cssLoaderGetLocalIdent = require('css-loader/lib/getLocalIdent.js');
-const withCss = require('@zeit/next-css');
 
 const prod = process.env.NODE_ENV === 'production';
 const prefix = prod ? '/next-dynamic-antd-theme/' : '/';
