@@ -17,6 +17,7 @@ const withAntdTheme = generateTheme({
 });
 
 withAntd = (nextConfig = {}) => {
+  if (typeof nextConfig === 'function') nextConfig = nextConfig({});
   return Object.assign({}, nextConfig, {
     ...nextConfig,
     lessLoaderOptions: {

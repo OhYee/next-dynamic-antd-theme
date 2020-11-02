@@ -116,7 +116,9 @@ module.exports = function generate(themeOptions) {
     }
   };
   return (nextConfig = {}) => {
+    if (typeof nextConfig === 'function') nextConfig = nextConfig({});
     return Object.assign({}, nextConfig, {
+      ...nextConfig,
       publicRuntimeConfig: {
         // Will be available on both server and client
         ...nextConfig.publicRuntimeConfig,
