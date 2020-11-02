@@ -1,6 +1,6 @@
 {
     "name": "next-dynamic-antd-theme",
-    "version": "0.0.15",
+    "version": "0.0.16",
     "description": "A plugin for next to change ant design theme dynamicly",
     "main": "index.js",
     "scripts": {
